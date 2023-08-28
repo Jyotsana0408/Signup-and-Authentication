@@ -1,17 +1,12 @@
 import { useState, useRef, useContext } from 'react';
-
-import AuthContext from '../../Store/AuthContext'
+import AuthContext from '../../Store/AuthContext';
 import classes from './AuthForm.module.css';
-
 const AuthForm = () => {
   const emailInputRef = useRef();
   const passwordInputRef = useRef();
-
   const authCtx = useContext(AuthContext);
-
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-
   const switchAuthModeHandler = () => {
     setIsLogin((prevState) => !prevState);
   };
@@ -19,13 +14,11 @@ const AuthForm = () => {
     event.preventDefault();
     const enteredEmail = emailInputRef.current.value;
     const enteredPassword = passwordInputRef.current.value;
-
-
     setIsLoading(true);
     let url;
     if (isLogin) {
       url =
-      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD61trb_TQ27ZLrT4ybyyFKWkht-DaUa0o'
+      'https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=AIzaSyD61trb_TQ27ZLrT4ybyyFKWkht-DaUa0o';
     } else {
       url =
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyD61trb_TQ27ZLrT4ybyyFKWkht-DaUa0o';
@@ -51,7 +44,6 @@ const AuthForm = () => {
             // if (data && data.error && data.error.message) {
             //   errorMessage = data.error.message;
             // }
-
             throw new Error(errorMessage);
           });
         }
@@ -63,7 +55,6 @@ const AuthForm = () => {
         alert(err.message);
       });
   };
-
   return (
     <section className={classes.auth}>
       <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>
